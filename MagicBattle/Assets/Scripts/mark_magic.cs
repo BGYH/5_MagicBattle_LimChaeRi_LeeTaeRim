@@ -68,7 +68,7 @@ public class mark_magic : MonoBehaviour
     string find_magic(int num) //원하는 번호의 속성 가져오기
     {
         
-        string fileName = "TestJson";
+        string fileName = "SecondJson";
         string path = Application.dataPath + "/" + fileName + ".Json";
 
         FileStream filestream = new FileStream(path, FileMode.Open);

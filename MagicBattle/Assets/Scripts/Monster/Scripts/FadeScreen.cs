@@ -16,12 +16,12 @@ public class FadeScreen : MonoBehaviour
     }
     public IEnumerator FadeIn()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
         Fade(0.5f, 0);
     }
     public IEnumerator FadeOut()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
         Fade(0, 0.5f);
     }
 

@@ -11,6 +11,13 @@ TagManager:
   - Monster
   - wind
   - dark
+  - fire
+  - water
+  - electric
+  - illusion
+  - earth
+  - Animal
+  - dragonBall
   layers:
   - Default
   - TransparentFX

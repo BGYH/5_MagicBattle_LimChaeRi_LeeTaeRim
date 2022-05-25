@@ -13,7 +13,6 @@ public class magicAttack : MonoBehaviour
 {
     public XRController controller;
     public XRController Lcontroller;
-    public GameObject Igniter;
     public GameObject Fire;
     public GameObject Ice;
     public GameObject Electric;
@@ -28,6 +27,7 @@ public class magicAttack : MonoBehaviour
     public GameObject magic1;
     public GameObject magic2;
     public GameObject magic3;
+    public GameObject Damage;
 
     //public GameObject Monster;
 
@@ -55,8 +55,7 @@ public class magicAttack : MonoBehaviour
                 if (time > 0.7f)
                 {
                     Debug.Log("Trigger - magic3");
-                    Igniter.GetComponent<SphereIgnite>().affectedClass = EffectClass.Flame; //이그나이터의 효과 Flame으로 변경
-                    Instantiate(Igniter, MagicPos.transform.position, MagicPos.transform.rotation); //이그나이터 발사
+                    Instantiate(Damage, MagicPos.transform.position, MagicPos.transform.rotation);
                     time = 0.0f;
                 }
                 Destroy(bullet3, 2.0f); //2초 후 발사한 마법공격 삭제
@@ -70,8 +69,7 @@ public class magicAttack : MonoBehaviour
                 if (time > 0.7f)
                 {
                     Debug.Log("Trigger - magic1");
-                    Igniter.GetComponent<SphereIgnite>().affectedClass = EffectClass.Grass;
-                    Instantiate(Igniter, MagicPos.transform.position, MagicPos.transform.rotation);
+                    Instantiate(Damage, MagicPos.transform.position, MagicPos.transform.rotation);
                     time = 0.0f;
                 }
                 Destroy(bullet1, 2.0f);
@@ -84,10 +82,8 @@ public class magicAttack : MonoBehaviour
                 GameObject bullet2 = (GameObject)Instantiate(magic2, MagicPos.transform.position, MagicPos.transform.rotation);
                 if (time > 0.7f)
                 {
-                    //지팡이 선택할 때 부터 제이슨에 이그나이터 정보까지 저장
                     Debug.Log("Trigger - magic2");
-                    Igniter.GetComponent<SphereIgnite>().affectedClass = EffectClass.Grass;
-                    Instantiate(Igniter, MagicPos.transform.position, MagicPos.transform.rotation);
+                    Instantiate(Damage, MagicPos.transform.position, MagicPos.transform.rotation);
                     time = 0.0f;
                 }
                 Destroy(bullet2, 2.0f);
@@ -96,7 +92,7 @@ public class magicAttack : MonoBehaviour
     }
     GameObject Get_magic(string title)
     {
-        string fileName = "TestJson";
+        string fileName = "SecondJson";
         string path = Application.dataPath + "/" + fileName + ".Json";
 
         FileStream filestream = new FileStream(path, FileMode.Open);
@@ -140,7 +136,7 @@ public class magicAttack : MonoBehaviour
     string find_magic(int num) //원하는 번호의 속성 가져오기
     {
 
-        string fileName = "TestJson";
+        string fileName = "SecondJson";
         string path = Application.dataPath + "/" + fileName + ".Json";
 
         FileStream filestream = new FileStream(path, FileMode.Open);

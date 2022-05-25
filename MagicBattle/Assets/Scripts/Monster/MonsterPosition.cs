@@ -18,12 +18,12 @@ public class MonsterPosition : MonoBehaviour
             count += Time.deltaTime;
             a.transform.position = Vector3.Lerp(wasPos, toPos, count);
 
-            if (count >= 3)
+            if (count >= 1)
             {
                 a.transform.position = toPos;
                 break;
             }
+            yield return null;
         }
-        yield return null;
     }
 }

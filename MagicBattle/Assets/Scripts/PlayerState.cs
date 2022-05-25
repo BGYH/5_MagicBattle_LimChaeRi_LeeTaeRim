@@ -12,5 +12,5 @@ public class PlayerState
     public string wand3;
     public string final_wand;
 
-    public int dragon;
+    public string dragon;
 }

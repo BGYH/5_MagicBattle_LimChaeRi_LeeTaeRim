@@ -16,6 +16,7 @@ public class ChatController : MonoBehaviour
     public ParticleSystem appearParticle;
 
     public GameObject FS;
+    public GameObject Dragon;
 
     // Start is called before the first frame update
     void Start()
@@ -67,18 +68,17 @@ public class ChatController : MonoBehaviour
         //Monster.SetActive(true);
         appearParticle.Play();
         StartCoroutine(Monster.GetComponent<MonsterPosition>().MonsterAppear(Monster));
-        Monster.GetComponent<Play_Animation>().attack();
-        Monster.GetComponent<Play_Animation>().attack_fin();
+        StartCoroutine(Monster.GetComponent<Play_Animation>().attack());
+        StartCoroutine(Monster.GetComponent<Play_Animation>().attack_fin());
         StartCoroutine(FS.GetComponent<FadeScreen>().FadeOut());
         StartCoroutine(FS.GetComponent<FadeScreen>().FadeIn());
-        
-
+        //StartCoroutine(Dragon.GetComponent<DragonPosition>().DragonAppear(Dragon));
         StartCoroutine(fst_Attack());
     }
 
     public IEnumerator fst_Attack()
     {
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(3.0f);
         Abtn.SetActive(true);
         yield return StartCoroutine(NormalChat("이 숲을 점령하고 있던 괴물에게 들켰어!"));
         yield return StartCoroutine(NormalChat("네 마법으로 괴물을 물리쳐주겠니?"));
@@ -95,7 +95,7 @@ public class ChatController : MonoBehaviour
         Abtn.SetActive(true);
         yield return StartCoroutine(NormalChat("이런, 강력한 공격에 지팡이가 고장났네!"));
         yield return StartCoroutine(NormalChat("너의 특별한 친구에게 도움을 요청해보자."));
-        yield return StartCoroutine(NormalChat("오른손으로 조이스틱을 누르고 별 모양을 그려봐!"));
+        yield return StartCoroutine(NormalChat("오른손의 B 버튼을 누르고 별 모양을 그려봐!"));
         yield return StartCoroutine(NormalChat(" "));
         Abtn.SetActive(false);
     }

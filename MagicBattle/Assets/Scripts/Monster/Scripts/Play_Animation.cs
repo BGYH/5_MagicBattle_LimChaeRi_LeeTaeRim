@@ -45,8 +45,9 @@ public class Play_Animation : MonoBehaviour
     {
         Invoke("damaged_stop", 1f);
     }
-    public void attack()
+    public IEnumerator attack()
     {
+        yield return new WaitForSeconds(1.0f);
         Debug.Log("Monster 선빵");
         animator.SetBool("attack_short_001", true);
     }
@@ -54,8 +55,9 @@ public class Play_Animation : MonoBehaviour
     {
         animator.SetBool("attack_short_001", false);
     }
-    public void attack_fin() 
+    public IEnumerator attack_fin() 
     {
+        yield return new WaitForSeconds(1.0f);
         Invoke("attack_stop", 1f); //공격모션 attack() 쓴다음에 바로 다음 줄에 attack_fin()을 써줘야함
     }
     public void attack_magic()
@@ -70,5 +72,17 @@ public class Play_Animation : MonoBehaviour
     {
         Invoke("attack_magic_stop", 6f); //마찬가지로 attack_magic()쓴다음attack_magic_fin을 써준다. 스탑은 쓰는거 아님
     }
+    public void dead()
+    {
+        animator.SetBool("dead", true);
 
+    }
+    public void dead_stop()
+    {
+        animator.SetBool("dead", false);
+    }
+    public void dead_fin()
+    {
+        Invoke("dead", 1f);
+    }
 }

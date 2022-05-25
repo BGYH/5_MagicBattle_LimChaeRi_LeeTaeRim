@@ -45,7 +45,7 @@ public class Bring_wand : MonoBehaviour
     }
     void set_active(bool a)
     {
-        string fileName = "TestJson";
+        string fileName = "SecondJson";
         string path = Application.dataPath + "/" + fileName + ".Json";
 
         FileStream filestream = new FileStream(path, FileMode.Open);

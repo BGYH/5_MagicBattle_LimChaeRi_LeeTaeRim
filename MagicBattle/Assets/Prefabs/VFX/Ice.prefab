@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4459017012204822918}
   - component: {fileID: 2180449182519320351}
+  - component: {fileID: 8924037859297262552}
+  - component: {fileID: 4299794740345927350}
   m_Layer: 0
   m_Name: Ice
-  m_TagString: Untagged
+  m_TagString: water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +46,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44543c93cf82af4d9e7db52cbf98c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &8924037859297262552
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5870891096617983595}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &4299794740345927350
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5870891096617983595}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &3213668911517188402
 PrefabInstance:
   m_ObjectHideFlags: 0

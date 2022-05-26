@@ -23,6 +23,9 @@ public class Bring_wand : MonoBehaviour
     }
     void change_inter()
     {
+        
+        magicAttack ma = GameObject.Find("XR Origin").GetComponent<magicAttack>();
+        
 
         if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 position))
         {
@@ -30,12 +33,14 @@ public class Bring_wand : MonoBehaviour
 
             if (position.y > 0)
             {
+                ma.go = 1;
                 transform.Find("RightHand Controller").gameObject.SetActive(false);
                 set_active(true);
                 transform.Find("Camera Offset").Find("Ray Interactor").gameObject.SetActive(false);
             }
             else if (position.y < 0)
             {
+                ma.go = 0;
                 transform.Find("RightHand Controller").gameObject.SetActive(true);
                 set_active(false);
                 transform.Find("Camera Offset").Find("Ray Interactor").gameObject.SetActive(true);
@@ -45,7 +50,7 @@ public class Bring_wand : MonoBehaviour
     }
     void set_active(bool a)
     {
-        string fileName = "SecondJson";
+        string fileName = "TestJson";
         string path = Application.dataPath + "/" + fileName + ".Json";
 
         FileStream filestream = new FileStream(path, FileMode.Open);

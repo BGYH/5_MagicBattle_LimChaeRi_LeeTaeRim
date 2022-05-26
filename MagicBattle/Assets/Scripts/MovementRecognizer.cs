@@ -5,14 +5,20 @@ using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using PDollarGestureRecognizer;
 using System.IO;
+using System.Text;
 using UnityEngine.Events;
+
 
 public class MovementRecognizer : MonoBehaviour
 {
     public XRNode inputSource;
     public InputHelpers.Button inputButton;
     public float inputThreshold = 0.005f;
-    public Transform movementSource;
+   // public Transform movementSource;
+    public GameObject movementSource;
+    public GameObject XR;
+   
+   
 
     public float newPositionThresholdDistance = 0.01f;
     public GameObject HelpmeDragon;
@@ -32,6 +38,7 @@ public class MovementRecognizer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        movementSource = find_pos(find_magic(4));
         string[] gestureFiles = Directory.GetFiles(Application.dataPath, "*.xml");
         foreach (var item in gestureFiles)
         {
@@ -64,12 +71,13 @@ public class MovementRecognizer : MonoBehaviour
         Debug.Log("Start movement");
         isMoving = true;
         positionsList.Clear();
-        positionsList.Add(movementSource.position); //레이인터랙터가 움직이는 position값을 리스트로 저장
+        //positionsList.Add(movementSource.position); //레이인터랙터가 움직이는 position값을 리스트로 저장
+        positionsList.Add(movementSource.transform.position);
 
-        if(HelpmeDragon)
+        if (HelpmeDragon)
         {
             //Instantiate함수로 파티클 오브젝트를 레이인터랙터의 위치에 복사, 7초 후 삭제
-            Destroy(Instantiate(HelpmeDragon, movementSource.position, Quaternion.identity), 5);
+            Destroy(Instantiate(HelpmeDragon, movementSource.transform.position, Quaternion.identity), 5);
         }
     }
 
@@ -116,15 +124,86 @@ public class MovementRecognizer : MonoBehaviour
         //레이인터랙터 포지션값을 저장했던 리스트의 젤 마지막 값을 lastPosition 벡터값에 저장
 
         //(레이인터랙터의 현재 포지션)~(리스트 제일 마지막 포지션)벡터 거리가 0.005보다 길 경우
-        if (Vector3.Distance(movementSource.position, lastPosition) > newPositionThresholdDistance) 
+        if (Vector3.Distance(movementSource.transform.position, lastPosition) > newPositionThresholdDistance) 
         {
-            positionsList.Add(movementSource.position); //현재 포지션 저장
+            positionsList.Add(movementSource.transform.position); //현재 포지션 저장
 
             if (HelpmeDragon)
             {
-                Destroy(Instantiate(HelpmeDragon, movementSource.position, Quaternion.identity), 3);
+                Destroy(Instantiate(HelpmeDragon, movementSource.transform.position, Quaternion.identity), 3);
             }
         }
         
     }
+    string find_magic(int num) //원하는 번호의 속성 가져오기
+    {
+
+        string fileName = "TestJson";
+        string path = Application.dataPath + "/" + fileName + ".Json";
+
+        FileStream filestream = new FileStream(path, FileMode.Open);
+        byte[] data = new byte[filestream.Length];
+        filestream.Read(data, 0, data.Length);
+        filestream.Close();
+        string json = Encoding.UTF8.GetString(data);
+
+        PlayerState myplayerState = JsonUtility.FromJson<PlayerState>(json);
+        if (num == 1)
+        {
+            return myplayerState.wand1;
+        }
+        else if (num == 2)
+        {
+            return myplayerState.wand2;
+        }
+        else if (num == 3)
+        {
+            return myplayerState.wand3;
+        }
+        else if (num == 4)
+        {
+            return myplayerState.final_wand;
+        }
+        else
+        {
+            return "";
+        }
+
+
+    }
+    GameObject find_pos(string wand)
+    {
+        GameObject a;
+        switch (wand)
+        {
+            case "earth":
+                return XR.transform.GetChild(3).gameObject.transform.GetChild(0).gameObject;
+
+            case "fire":
+                return XR.transform.GetChild(4).gameObject.transform.GetChild(0).gameObject;
+
+            case "water":
+                return XR.transform.GetChild(5).gameObject.transform.GetChild(0).gameObject;
+
+            case "wind":
+                return XR.transform.GetChild(6).gameObject.transform.GetChild(0).gameObject;
+
+            case "electric":
+                return XR.transform.GetChild(7).gameObject.transform.GetChild(0).gameObject;
+
+            case "dark":
+                return XR.transform.GetChild(8).gameObject.transform.GetChild(0).gameObject;
+
+            case "light":
+                return XR.transform.GetChild(9).gameObject.transform.GetChild(0).gameObject;
+
+            case "illusion":
+                return XR.transform.GetChild(10).gameObject.transform.GetChild(0).gameObject;
+
+            default:
+                return null;
+
+        }
+    }
+
 }

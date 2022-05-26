@@ -18,7 +18,7 @@ public class DragonHelpMe : MonoBehaviour
     // Start is called before the first frame update
     public void Spawn()
     {
-        string fileName = "SecondJson";
+        string fileName = "TestJson";
         string path = Application.dataPath + "/" + fileName + ".Json";
 
         FileStream filestream = new FileStream(path, FileMode.Open);

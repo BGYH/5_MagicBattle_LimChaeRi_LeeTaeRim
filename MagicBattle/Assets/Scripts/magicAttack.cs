@@ -29,6 +29,17 @@ public class magicAttack : MonoBehaviour
     public GameObject magic3;
     public GameObject Damage;
 
+    public XRController earthcon;
+    public XRController firecon;
+    public XRController watercon;
+    public XRController windcon;
+    public XRController electriccon;
+    public XRController darkcon;
+    public XRController lightcon;
+    public XRController illusioncon;
+
+    public int go = 0;
+
     //public GameObject Monster;
 
     // Start is called before the first frame update
@@ -38,61 +49,66 @@ public class magicAttack : MonoBehaviour
         magic2 = Get_magic(find_magic(2));
         magic3 = Get_magic(find_magic(3));
         MagicPos = find_pos(find_magic(4));
+        controller = find_con(find_magic(4));
     }
 
     // Update is called once per frame
     void Update()
     {
-        controller.inputDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue);
-        Lcontroller.inputDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 position);
-        time += Time.deltaTime;
+        if (go == 1)
+        {
+            controller.inputDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue);
+            Lcontroller.inputDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 position);
+            time += Time.deltaTime;
 
-        if (position.x > 0 && position.y < 0.7) //왼손 조이스틱 오른쪽으로 당기면
-        {
-            if (triggerValue > 0.1f) //오른손 트리거 눌렀을 때
+            if (position.x > 0 && position.y < 0.7) //왼손 조이스틱 오른쪽으로 당기면
             {
-                GameObject bullet3 = (GameObject)Instantiate(magic3, MagicPos.transform.position, MagicPos.transform.rotation);
-                if (time > 0.7f)
+                if (triggerValue > 0.1f) //오른손 트리거 눌렀을 때
                 {
-                    Debug.Log("Trigger - magic3");
-                    Instantiate(Damage, MagicPos.transform.position, MagicPos.transform.rotation);
-                    time = 0.0f;
+                    GameObject bullet3 = (GameObject)Instantiate(magic3, MagicPos.transform.position, MagicPos.transform.rotation);
+                    if (time > 0.7f)
+                    {
+                        Debug.Log("Trigger - magic3");
+                        Instantiate(Damage, MagicPos.transform.position, MagicPos.transform.rotation);
+                        time = 0.0f;
+                    }
+                    Destroy(bullet3, 2.0f); //2초 후 발사한 마법공격 삭제
                 }
-                Destroy(bullet3, 2.0f); //2초 후 발사한 마법공격 삭제
+            }
+            else if (position.x < 0 && position.y < 0.7) //왼쪽으로 당기면
+            {
+                if (triggerValue > 0.1f)
+                {
+                    GameObject bullet1 = (GameObject)Instantiate(magic1, MagicPos.transform.position, MagicPos.transform.rotation);
+                    if (time > 0.7f)
+                    {
+                        Debug.Log("Trigger - magic1");
+                        Instantiate(Damage, MagicPos.transform.position, MagicPos.transform.rotation);
+                        time = 0.0f;
+                    }
+                    Destroy(bullet1, 2.0f);
+                }
+            }
+            if (position.y >= 0.7) //위쪽으로 당기면
+            {
+                if (triggerValue > 0.1f)
+                {
+                    GameObject bullet2 = (GameObject)Instantiate(magic2, MagicPos.transform.position, MagicPos.transform.rotation);
+                    if (time > 0.7f)
+                    {
+                        Debug.Log("Trigger - magic2");
+                        Instantiate(Damage, MagicPos.transform.position, MagicPos.transform.rotation);
+                        time = 0.0f;
+                    }
+                    Destroy(bullet2, 2.0f);
+                }
             }
         }
-        else if (position.x < 0 && position.y < 0.7) //왼쪽으로 당기면
-        {
-            if (triggerValue > 0.1f)
-            {
-                GameObject bullet1 = (GameObject)Instantiate(magic1, MagicPos.transform.position, MagicPos.transform.rotation);
-                if (time > 0.7f)
-                {
-                    Debug.Log("Trigger - magic1");
-                    Instantiate(Damage, MagicPos.transform.position, MagicPos.transform.rotation);
-                    time = 0.0f;
-                }
-                Destroy(bullet1, 2.0f);
-            }
-        }
-        if (position.y >= 0.7) //위쪽으로 당기면
-        {
-            if (triggerValue > 0.1f)
-            {
-                GameObject bullet2 = (GameObject)Instantiate(magic2, MagicPos.transform.position, MagicPos.transform.rotation);
-                if (time > 0.7f)
-                {
-                    Debug.Log("Trigger - magic2");
-                    Instantiate(Damage, MagicPos.transform.position, MagicPos.transform.rotation);
-                    time = 0.0f;
-                }
-                Destroy(bullet2, 2.0f);
-            }
-        }
+        
     }
     GameObject Get_magic(string title)
     {
-        string fileName = "SecondJson";
+        string fileName = "TestJson";
         string path = Application.dataPath + "/" + fileName + ".Json";
 
         FileStream filestream = new FileStream(path, FileMode.Open);
@@ -136,7 +152,7 @@ public class magicAttack : MonoBehaviour
     string find_magic(int num) //원하는 번호의 속성 가져오기
     {
 
-        string fileName = "SecondJson";
+        string fileName = "TestJson";
         string path = Application.dataPath + "/" + fileName + ".Json";
 
         FileStream filestream = new FileStream(path, FileMode.Open);
@@ -203,4 +219,40 @@ public class magicAttack : MonoBehaviour
 
         }
     }
+
+    XRController find_con(string wand)
+    {
+        GameObject a;
+        switch (wand)
+        {
+            case "earth":
+                return earthcon;
+
+            case "fire":
+                return firecon;
+
+            case "water":
+                return watercon;
+
+            case "wind":
+                return windcon;
+
+            case "electric":
+                return electriccon;
+
+            case "dark":
+                return darkcon;
+
+            case "light":
+                return lightcon;
+
+            case "illusion":
+                return illusioncon;
+
+            default:
+                return null;
+
+        }
+    }
+
 }

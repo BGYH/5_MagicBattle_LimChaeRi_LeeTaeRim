@@ -22,9 +22,14 @@ public class StartEndFade : MonoBehaviour
         Fade(1, 0);
     }
 
-    public IEnumerator FadeOut()
+    //public IEnumerator FadeOut()
+    //{
+    //    yield return new WaitForSeconds(1.0f);
+    //    Fade(0, 1);
+    //}
+    public void FadeOut()
     {
-        yield return new WaitForSeconds(1.0f);
+        //yield return new WaitForSeconds(1.0f);
         Fade(0, 1);
     }
 

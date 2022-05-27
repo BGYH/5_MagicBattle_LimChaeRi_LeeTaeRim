@@ -85,8 +85,9 @@ public class Health : MonoBehaviour
         MA.magic3.SetActive(true);
         MA.Damage.SetActive(true); //다시 활성화 시켜줘야 또 할때 멀쩡함
 
-        StartCoroutine(FadeScreen.GetComponent<StartEndFade>().FadeOut());
-        SceneManager.LoadScene("testScene");
+        Change_fade cf = GameObject.Find("FadeOut").GetComponent<Change_fade>();
+        cf.GoToScene(1);
+        //SceneManager.LoadScene("testScene");
 
     }
 }

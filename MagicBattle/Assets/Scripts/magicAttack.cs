@@ -187,7 +187,7 @@ public class magicAttack : MonoBehaviour
     }
     GameObject find_pos(string wand)
     {
-        GameObject a;
+        
         switch (wand)
         {
             case "earth":

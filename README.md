@@ -1,1 +1,2 @@
-# Magic_Battle2
+# Magic Battle Project
+Lim Chae Ri, Lee Tae Rim

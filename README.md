@@ -1,2 +1,2 @@
 # Magic Battle Project
-Lim Chae Ri, Lee Tae Rim
+Lim Chaeri, Lee Taerim's work
